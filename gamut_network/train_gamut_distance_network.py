@@ -183,6 +183,19 @@ def generate_dataset(args):
         print(f"Using existing dataset: {dataset_path}")
         return dataset_path
 
+    # Check Gurobi license before starting generation
+    try:
+        import sys
+        with gp.Env(empty=True) as env:
+            env.setParam("OutputFlag", 0)
+            env.start()
+    except Exception as e:
+        import sys
+        print("\n[Error] No valid Gurobi license found!")
+        print("Please activate your Gurobi license to generate the training dataset.")
+        print(f"Gurobi Error: {e}\n")
+        sys.exit(1)
+
     np.random.seed(args.seed)
     samples_per_t = args.num_samples // args.num_t_matrices
     actual_samples = samples_per_t * args.num_t_matrices
@@ -211,7 +224,7 @@ def generate_dataset(args):
     coverage_by_type = {"small": [], "medium": [], "large": []}
 
     workers = args.num_workers if args.num_workers is not None else mp.cpu_count()
-    print(f"Generating {actual_samples:,} samples with {args.num_t_matrices:,} T matrices.")
+
     print(f"Gurobi workers: {workers}")
 
     for t_matrix, label in tqdm(list(zip(t_matrices, gamut_labels)), desc="T matrices"):

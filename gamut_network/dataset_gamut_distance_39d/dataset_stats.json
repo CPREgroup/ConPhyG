@@ -1,0 +1,26 @@
+{
+  "num_samples": 1000000,
+  "num_T_matrices": 1000,
+  "samples_per_T": 1000,
+  "in_gamut_count": 198526,
+  "out_gamut_count": 801474,
+  "in_gamut_ratio": 0.198526,
+  "input_dim": 39,
+  "p_vector_dim": 12,
+  "gamut_distribution": {
+    "small": 200000,
+    "medium": 400000,
+    "large": 400000
+  },
+  "coverage_by_type": {
+    "small": 0.0,
+    "medium": 0.0260475,
+    "large": 0.47026749999999995
+  },
+  "distance_stats": {
+    "mean": 1.4403620958328247,
+    "median": 1.0370700359344482,
+    "max": 6.657345771789551,
+    "min": 1.6830563635480966e-13
+  }
+}
